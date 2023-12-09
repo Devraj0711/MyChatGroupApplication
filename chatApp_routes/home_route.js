@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 
-const HomeController = require('../chatApp_controllers/home_controllers');
+const HomeController = require('../chatApp_controllers/home_controller');
 
 const router = express.Router();
 

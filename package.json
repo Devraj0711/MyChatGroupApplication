@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.5",
+    "sequelize": "^6.35.1"
+  },
+  "name": "groupchat_application",
+  "description": "��#\u0000 \u0000M\u0000y\u0000C\u0000h\u0000a\u0000t\u0000G\u0000r\u0000o\u0000u\u0000p\u0000A\u0000p\u0000p\u0000l\u0000i\u0000c\u0000a\u0000t\u0000i\u0000o\u0000n\u0000\r\u0000 \u0000",
+  "version": "1.0.0",
+  "main": "chat_app.js",
+  "scripts": {
+    "start": "node chat_app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devraj0711/MyChatGroupApplication.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Devraj0711/MyChatGroupApplication/issues"
+  },
+  "homepage": "https://github.com/Devraj0711/MyChatGroupApplication#readme"
+}

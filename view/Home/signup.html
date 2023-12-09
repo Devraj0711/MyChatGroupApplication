@@ -101,8 +101,8 @@
                     <label for="Email">Email</label>
                     <input type="text" name="Email" id="Email" required>
 
-                    <label for="phone">Enter a phone number:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="012-3456-789" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" required>
+                    <label for="phone_number">Enter a phone number:</label>
+                    <input type="tel" id="phone_number" name="phone_number" placeholder="012-3456-789" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" required>
                     <!-- <small>Format: 012-3456-789</small><br><br> -->
 
                     <label for="Password">Enter Password</label>
@@ -134,8 +134,9 @@
                 e.preventDefault(); 
                 console.log(e.target.name);
                 const loginDetails ={
-                    Username: e.target.Username.value,
+                    name: e.target.name.value,
                     Email: e.target.Email.value,
+                    phone_number: e.target.phone_number.value,
                     Password: e.target.Password.value
                 }
                 console.log(loginDetails);

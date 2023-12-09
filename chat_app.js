@@ -28,10 +28,10 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
 
-const chatRoutes = require('./chatApp_routes/');
+const chatRoutes = require('./chatApp_routes/home_route');
 
 
-
+app.use(chatRoutes);
 app.use(errorController.get404);  
 
 app.use((req, res) => {
