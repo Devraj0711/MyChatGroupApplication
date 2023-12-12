@@ -14,7 +14,7 @@ const app = express();
 // get config vars
 require('dotenv').config();
 
-app.use(cors());
+app.use(cors({origin: "*",}));
 
 app.use(express.json()); // Parse JSON-encoded bodies
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +39,7 @@ app.use((req, res) => {
     res.sendFile(path.join(__dirname, `views/${req.url}`))
 
 })
+
 
 
 
