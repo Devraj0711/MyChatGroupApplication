@@ -91,14 +91,14 @@ const generateAccessToken = (id, ispremiumuser) => {
 // }
 
 exports.PostSignin = (req, res, next) => {
-    const {Username, Password }= req.body
+    const {name, Password }= req.body
     console.log(req.body);
 
-    console.log(Username);
+    console.log(name);
     // Check if the username exists in the database
     Home_page.findAll({
         where: {
-            Username: Username
+            name: name
         }
     })
     .then(user => {

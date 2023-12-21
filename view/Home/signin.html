@@ -16,7 +16,7 @@
             align-items: center;
             height: 100vh;
         }
-
+    
         main {
             max-width: 400px;
             width: 100%;
@@ -26,30 +26,32 @@
             border-radius: 10px;
             text-align: center;
         }
-
+    
         form {
             margin-bottom: 20px;
         }
-
+    
         fieldset {
-            border: 2px solid #3498db;
-            border-radius: 8px;
+            border: none;
             padding: 15px;
             margin-bottom: 20px;
         }
-
+    
         legend {
             color: #3498db;
             font-weight: bold;
             margin-bottom: 10px;
+            font-size: 24px;
         }
-
+    
         label {
             display: block;
             margin-bottom: 8px;
             color: #333;
+            text-align: left;
+            font-size: 16px;
         }
-
+    
         input {
             width: calc(100% - 20px);
             padding: 10px;
@@ -59,7 +61,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
-
+    
         button {
             background-color: #3498db;
             color: #fff;
@@ -70,22 +72,49 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-
+    
         button:hover {
             background-color: #2980b9;
         }
-
+    
         .forgot-password {
             color: #666;
             text-decoration: underline;
             cursor: pointer;
             font-size: 14px;
         }
-
+    
         .forgot-password:hover {
             color: #444;
         }
+    
+        #msg {
+            text-align: left;
+            color: red;
+            font-size: 14px;
+        }
+    
+        .expense-signup {
+            text-align: right;
+        }
+    
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .btn:hover {
+            background-color: #2980b9;
+        }
     </style>
+    
 </head>
 
 <body>
@@ -135,7 +164,7 @@
                     Password: e.target.Password.value
                 }
                 console.log(loginDetails);
-               axios.post('http://localhost:2000/Home/signin', loginDetails)
+               axios.post('http://localhost:3000/Home/signin', loginDetails)
                .then(response => {
                 if(response.status === 200)
                 {
