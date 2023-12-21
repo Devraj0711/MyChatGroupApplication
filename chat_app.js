@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // this is inclued for ejs template
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', 'view');
 
 //for body parser and public path
 app.use(bodyParser.urlencoded({ extended: false }));

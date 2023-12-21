@@ -9,10 +9,11 @@ const router = express.Router();
 // /admin/home => GET
 
 router.get('/', HomeController.getSignup);
-router.post('/Home/signup', HomeController.postAddDetails);
+router.post('/Home/signup', HomeController.postAddSignupDetails);
 
-// router.get('/Home/signin',HomeController.getSignin);
-// router.post('/Home/signin',HomeController.PostSignin);
+router.get('/Home/signin', HomeController.getSignin);
+router.post('/Home/signin', HomeController.PostSignin);
+
 
 // router.get('/password/forgetPassword', HomeController.getPassword)
 
