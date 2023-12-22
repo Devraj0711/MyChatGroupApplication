@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,8 +32,7 @@
         }
     
         fieldset {
-            border: 2px solid #3498db;
-            border-radius: 8px;
+            border: none;
             padding: 15px;
             margin-bottom: 20px;
         }
@@ -78,15 +77,41 @@
             background-color: #2980b9;
         }
     
-        .signin-link {
+        .forgot-password {
             color: #666;
             text-decoration: underline;
             cursor: pointer;
             font-size: 14px;
         }
     
-        .signin-link:hover {
+        .forgot-password:hover {
             color: #444;
+        }
+    
+        #msg {
+            text-align: left;
+            color: red;
+            font-size: 14px;
+        }
+    
+        .expense-signup {
+            text-align: right;
+        }
+    
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .btn:hover {
+            background-color: #2980b9;
         }
     </style>
     
@@ -94,76 +119,78 @@
 
 <body>
     <main>
-        <form class="expense-form" action="/Home/signup.html" onsubmit="handleLoginFormSubmission(event)" id="signupForm"
-            method="POST">
+        <form class="expense-form" id="loginForm" onsubmit="handleLoginFormSubmission(event)" >
             <fieldset>
-                <legend>Create Account</legend>
+                <legend>Login</legend>
                 <div class="sigin">
-                    <label for="name">Name: </label>
-                    <input type="text" name="name" id="name" required>
-
-                    <label for="Email">Email</label>
-                    <input type="text" name="Email" id="Email" required>
-
-                    <label for="phone_number">Enter a phone number:</label>
-                    <input type="tel" id="phone_number" name="phone_number" placeholder="012-3456-789" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" required>
-                    <!-- <small>Format: 012-3456-789</small><br><br> -->
+                    <label for="name">Username</label>
+                    <input type="text" name="name" id="name" required />
 
                     <label for="Password">Enter Password</label>
-                    <input name="Password" id="Password" required>
-                    <button class="btn" type="submit">Signup</button>
+                    <input type="password" name="Password" id="Password" required />
+                    <button class="btn" type="submit">Sign In</button>
                 </div>
             </fieldset>
         </form>
 
-        <div class="signin-link" onclick="window.location.href='http://localhost:3000/Home/signin'">Already a User? Sign
-            In</div>
+        <div id="msg"></div>
+
+        <div class="forgot-password" onclick="forgotpassword()">Forgot Password?</div>
+
+        <form class="expense-signup" action="/" id="signinForm" method="GET">
+            <label for="sigup">Create an Account =></label>
+            <button class="btn" type="submit" id="sigup">Signup</button>
+        </form>
     </main>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js" integrity="sha512-Fh/JL4KFgbH0OFN4EMEOvk90MTCjVuTVGFRDc+Kh5PyUFOzSzn/KA6PTOSNywfm5Ruppr40Uj09oGuj5tn6jiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js" integrity="sha512-Fh/JL4KFgbH0OFN4EMEOvk90MTCjVuTVGFRDc+Kh5PyUFOzSzn/KA6PTOSNywfm5Ruppr40Uj09oGuj5tn6jiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script>
          window.onload = function() {
              // Get data from the server or determine it dynamically
-             var pageTitle = "Create Account";  // Replace this with the actual title
-             var path = "/Home/signup";  // Replace this with the actual path
+             var pageTitle = "Login Page";  // Replace this with the actual title
+             var path = "Login/signup";  // Replace this with the actual path
  
              // Set the page title
              document.title = pageTitle;
- 
-             // Set other dynamic content as needed
-             // ...
 
-         }
+            } //end of function
 
-         function handleLoginFormSubmission(e) {
+            function handleLoginFormSubmission(e) {
                 e.preventDefault(); 
                 console.log(e.target.name);
                 const loginDetails ={
                     name: e.target.name.value,
-                    Email: e.target.Email.value,
-                    phone_number: e.target.phone_number.value,
                     Password: e.target.Password.value
                 }
                 console.log(loginDetails);
-               axios.post('http://localhost:3000/Home/signup', loginDetails)
+               axios.post('http://localhost:3000/Login/signin', loginDetails)
                .then(response => {
                 if(response.status === 200)
                 {
-                    alert(response.data.message);
-                    window.location.href = 'http://localhost:3000/Home/signin';  // this code redirects to the signin page after alert box display
+                    localStorage.setItem('token', response.data.token )
+                    alert(response.data.message)
+                    window.location.href = '../Message/chatScreen';
                 }
                 
                })
                .catch(error => {
                 console.log(JSON.stringify(error));
                 console.log("eh");
-                document.body.innerHTML += '<div style="color:red;">' + error.data.message + '</div>';
+                document.getElementById('msg').innerHTML='<div style="color:red;" >' + error.data.message + '</div>';
+                // document.body.innerHTML += '<div style="color:red;">' + error.data.message + '</div>';
    
                })
-            }; //end of function
-
+            };
+            
+            function forgotpassword() {
+                window.location.href = "http://localhost:2000/password/forgetPassword"
+            } //end of function
 
      </script>
 
 </body> 
 
 </html>
+
+

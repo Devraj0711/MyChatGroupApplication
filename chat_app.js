@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const cors = require('cors');
 
-const errorController = require('./chatApp_controllers/error');
+const errorController = require('./chatApp_controllers/error');  // to handle unknown url's
 
 const sequelize =require('./util/database');
 
@@ -28,10 +28,12 @@ app.set('views', 'view');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
 
-const chatRoutes = require('./chatApp_routes/home_route');
+const chatRoutes = require('./chatApp_routes/login_route');
+const chatScreenRoute = require('./chatApp_routes/chatScreen_route');
 
 
 app.use(chatRoutes);
+app.use(chatScreenRoute);
 app.use(errorController.get404);  
 
 app.use((req, res) => {

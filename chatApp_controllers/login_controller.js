@@ -1,4 +1,4 @@
-const Home_page = require('../models/signup_db');
+const Login_page = require('../models/signup_db');
 const path = require('path');
 const { Op } = require('sequelize');
 
@@ -8,9 +8,9 @@ const jwt= require('jsonwebtoken');
 
 //sigup page
 exports.getSignup = (req, res, next) => {
-    Home_page.findAll()
+    Login_page.findAll()
     .then(rows => {
-      res.sendFile(path.join(__dirname, '..', 'view', 'Home', 'signup.html'));
+      res.sendFile(path.join(__dirname, '..', 'view', 'Login', 'signup.html'));
       console.log(rows);
     })
     .catch(err => {
@@ -30,7 +30,7 @@ exports.postAddSignupDetails = (req, res, next) => {
     const Password = req.body.Password;
 
     // Check if the email already exists in the database
-    Home_page.findOne({
+    Login_page.findOne({
         where: {
             [Op.or]: [
                 { Email: Email },
@@ -47,7 +47,7 @@ exports.postAddSignupDetails = (req, res, next) => {
                 const saltrounds= 10;
                 bcrypt.hash(Password, saltrounds, async(err, hash) =>{
                     console.log(err)
-                    await Home_page.create({
+                    await Login_page.create({
                         name: name,
                         Email: Email,
                         phone_number: phone_number,
@@ -67,9 +67,9 @@ exports.postAddSignupDetails = (req, res, next) => {
 
 
 exports.getSignin = (req, res, next) => {
-    Home_page.findAll()
+    Login_page.findAll()
     .then(rows => {
-      res.sendFile(path.join(__dirname, '..', 'view', 'Home', 'signin.html'));
+      res.sendFile(path.join(__dirname, '..', 'view', 'Login', 'signin.html'));
       console.log(rows);
     })
     .catch(err => {
@@ -79,8 +79,8 @@ exports.getSignin = (req, res, next) => {
 };
 
 
-const generateAccessToken = (id, ispremiumuser) => {
-    return jwt.sign({ ExpenseReportId: id, ispremiumuser }, 'dvysis23');
+const generateAccessToken = (id, name) => {
+    return jwt.sign({ Id: id, name: name }, 'dvysis23');
 };
 
 // function generateAccessToken(id, ispremiumuser)
@@ -96,7 +96,7 @@ exports.PostSignin = (req, res, next) => {
 
     console.log(name);
     // Check if the username exists in the database
-    Home_page.findAll({
+    Login_page.findAll({
         where: {
             name: name
         }
@@ -114,7 +114,7 @@ exports.PostSignin = (req, res, next) => {
             {
                 ans=generateAccessToken(user[0].id);
                 console.log(generateAccessToken(user[0].id));
-                return res.status(200).json({ success: true, message: 'Login successful', token: generateAccessToken(user[0].id, user[0].ispremiumuser) });
+                return res.status(200).json({ success: true, message: 'Login successful', token: generateAccessToken(user[0].id, user[0].name) });
             }
             else
             {
@@ -135,11 +135,11 @@ exports.PostSignin = (req, res, next) => {
 };
 
 exports.getAns = () => {
-    return Home_page.ispremiumuser; // Export a function that returns the ans variable
+    return Login_page.ispremiumuser; // Export a function that returns the ans variable
 };
 
 exports.getPassword = (req, res, next) => {
-    Home_page.findAll()
+    Login_page.findAll()
     .then(rows => {
       res.sendFile(path.join(__dirname, '..', 'views', 'password', 'forgetPassword.html'));
       console.log(rows);

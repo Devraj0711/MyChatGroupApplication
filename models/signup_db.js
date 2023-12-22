@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
 
-const Home_page = sequelize.define('Signup_db', {
+const Login_page = sequelize.define('Signup_db', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -34,5 +34,5 @@ const Home_page = sequelize.define('Signup_db', {
   },
 });
 
-module.exports = Home_page;
+module.exports = Login_page;
 
