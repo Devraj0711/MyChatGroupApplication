@@ -36,6 +36,13 @@ app.use(chatRoutes);
 app.use(chatScreenRoute);
 app.use(errorController.get404);  
 
+//to set association between signup and message table 
+const Login_page = require('./models/signup_db');
+const StoreMessage_page= require('./models/storeMessage');
+
+StoreMessage_page.belongsTo(Login_page);
+Login_page.hasMany(StoreMessage_page);
+
 app.use((req, res) => {
     console.log('url', req.url);
     res.sendFile(path.join(__dirname, `views/${req.url}`))
