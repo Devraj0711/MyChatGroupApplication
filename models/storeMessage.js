@@ -14,6 +14,10 @@ const StoreMessage_page = sequelize.define('StoreMessage_db', {
     allowNull: false,
    
   },
+  Username:{
+    type:Sequelize.STRING,
+    allowNull:false,
+  }
 });
 
 module.exports = StoreMessage_page;

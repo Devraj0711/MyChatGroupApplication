@@ -14,8 +14,7 @@
 <body>
     <main>
         <div id="userList"></div>
-        <div id="AlluserMessage"></div>
-        <div id="currentUserMessage"></div>
+        <div id="userListMessage"></div>
         <form class="expense-form" id="first" onsubmit="handleLoginFormSubmission(event)">
             <br><br>
             <input type="text" id="message" name="message">
@@ -42,7 +41,7 @@
     document.title = pageTitle;
 
     try {
-        const response = await axios.get('http://localhost:3000/Message/showJoinedMember'); // to get the jsoon value
+        const response = await axios.get('http://localhost:3000/Message/showChat'); // to get the jsoon value
         console.log("Response:", response);
 
         if (response.status === 200) {
@@ -64,17 +63,6 @@
     } catch (error) {
         console.error(error);
     }
-
-    //to show all the message on the screen
-    const response = await axios.get('http://localhost:3000/Message/showmessage'); // to get all message
-    console.log("Response of message:", response.data);
-    const userMessage_ = document.getElementById('AlluserMessage');
-    userMessage_.innerHTML += response.data.map(element => {
-
-        console.log("show the message  ",element.message);
-        return`<p>${element.Username}: ${element.message}</p>`;   
-        });
-
 };
 
             function parseJwt (token) {
@@ -100,16 +88,20 @@
                 .then(response => {
                     // Handle the response as needed
                     console.log("Response from server:", response.data);
-                    const userMessage_ = document.getElementById('currentUserMessage');
-                    userMessage_.innerHTML += `<p>${decodeToken.name}: ${message}</p>`;
-                    
-                    })
+                    const userMessage_ = document.getElementById('userListMessage');
+                    userMessage_.innerHTML = response.data.userMessage.map(element => {
+                        const cleanedMessage = element.message.replace(/(\r\n|\n|\r)/gm, "");
+                        return `<p>${element.Username}: ${cleanedMessage}</p>`;
+                        // return `<p>${element.Username.trim()}: ${element.message.trim()}</p>`;
+                        // return`<p>${element.Username}: ${element.message}</p>`;   
+                    });
+
+                })
                 .catch(error => {
                     console.error("Error from server:", error);
                 });
 
             }
-      
 
      </script>
 
@@ -122,3 +114,14 @@
 
 
 
+<!-- fs.readFile('username.txt', (err, data) => {
+    let chatData = data;
+    if (err) {
+        console.log(err);
+        chatData = 'No Chat Exists';
+    }
+
+    res.send(
+       
+    );
+}); -->

@@ -7,7 +7,9 @@ const ChatScreenController = require('../chatApp_controllers/chatScreen_controll
 const router = express.Router();
 
 router.get('/Message/chatScreen', ChatScreenController.getChatScreen);
-router.get('/Message/showChat', ChatScreenController.getScreen);
+router.get('/Message/showJoinedMember', ChatScreenController.getScreen);
+router.get('/Message/showmessage', ChatScreenController.showmessage);
+
 
 router.post('/Message/chatScreen', ChatScreenController.postChatScreen);
 
