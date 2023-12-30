@@ -28,20 +28,31 @@ app.set('views', 'view');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')))
 
-const chatRoutes = require('./chatApp_routes/login_route');
-const chatScreenRoute = require('./chatApp_routes/chatScreen_route');
+const chatRoutes = require('./chatApp_routes/login_route')
+const homeScreenRoute = require('./chatApp_routes/homeScreenroute')
+const chatScreenRoute = require('./chatApp_routes/chatScreen_route')
 
 
 app.use(chatRoutes);
+app.use(homeScreenRoute);
 app.use(chatScreenRoute);
 app.use(errorController.get404);  
 
-//to set association between signup and message table 
+
 const Login_page = require('./models/signup_db');
 const StoreMessage_page= require('./models/storeMessage');
+const groupDetails_page= require('./models/groupDetails_db');
+const usersGroup= require('./models/userGroup_Join');
 
+//to set association between signup and message table 
 StoreMessage_page.belongsTo(Login_page);
 Login_page.hasMany(StoreMessage_page);
+
+// creating many to many relation between login_db and user's group
+Login_page.belongsToMany(groupDetails_page, { through: usersGroup, as: 'Groups' });
+groupDetails_page.belongsToMany(Login_page, { through: usersGroup, as: 'Members' });
+
+
 
 app.use((req, res) => {
     console.log('url', req.url);

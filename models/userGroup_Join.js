@@ -2,26 +2,28 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
 
-const StoreMessage_page = sequelize.define('StoreMessage_db', {
+const userGroup_db = sequelize.define('userGroup_Join_db', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  message: {
+  Usermessage:
+  {
     type: Sequelize.STRING,
     allowNull: false,
-   
   },
-  ContactUsername:{
-    type:Sequelize.STRING,
-    allowNull:false,
+  Username:
+  {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
-  CurrentUsername:{
-    type:Sequelize.STRING,
-    allowNull:false,
+  groupname:
+  {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
 });
 
-module.exports = StoreMessage_page;
+module.exports = userGroup_db;

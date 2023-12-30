@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Screen</title>
+    <title>Group Chat Screen</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -60,8 +60,7 @@
                 margin: 10px;
             }
         }
-    </style>
-    
+        </style>
 </head>
 
 <body>
@@ -69,18 +68,14 @@
         <div id="userList"></div>
         <div id="AlluserMessage"></div>
         <div id="currentUserMessage"></div>
-        <form class="expense-form" id="first" onsubmit="handleLoginFormSubmission(event)">
+        <form class="expense-form" id="first" onsubmit="handleGroupMessage(event)">
             <br><br>
             <input type="text" id="message" name="message">
             
             <button type="submit">Send</button>
         </form>
 
-        <!-- <form action="/" method="POST" onsubmit="document.getElementById('username').value=localStorage.getItem('username')"> 
-            <input type="text" id="message" name="message"><input type="hidden" name="username" id="username"><br> 
-            <button type="submit">Send</button>
-
-        </form> -->
+      
     </main>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js" integrity="sha512-Fh/JL4KFgbH0OFN4EMEOvk90MTCjVuTVGFRDc+Kh5PyUFOzSzn/KA6PTOSNywfm5Ruppr40Uj09oGuj5tn6jiQ==" crossorigin="anonymous"></script>
@@ -88,24 +83,23 @@
     <script>
    // ...
    window.onload = async function() {
-    var pageTitle = "Chat Screen";  // Replace this with the actual title
-    var path = "/Message/chatScreen";  // Replace this with the actual path
- 
-    //  // Set the page title
+    var pageTitle = "Group Chat Screen";  // Replace this with the actual title
+    var path = "/Message/groupchatScreen";  // Replace this with the actual path
+    // Set the page title
     document.title = pageTitle;
 
     const currentURL= window.location.href;
-
     var urlParts = currentURL.split('/');
 
     // The last part of the URL is at the end of the array
-    const contactName = urlParts[urlParts.length - 1];
-    console.log("name-----", contactName);
+    const groupName = urlParts[urlParts.length - 1];
 
+    const decodedGroupName = decodeURIComponent(groupName);
+
+                
+    console.log("name-----", decodedGroupName);
     try {
-       
-
-        const response = await axios.get(`http://localhost:3000/Message/showJoinedMember/${contactName}`); // to get the jsoon value
+        const response = await axios.get(`http://localhost:3000/Message/groupchatScreen/showMembers/${decodedGroupName}`); // to get the jsoon value
         console.log("Response:", response);
 
         if (response.status === 200) {
@@ -116,8 +110,10 @@
             // Check if userList is an array before using map
           
                 const userListElement = document.getElementById('userList');
+                response.data.forEach((element)=>{
+                    userListElement.innerHTML +=  `<p>${element} joined</p>`;
+                })
                 
-                userListElement.innerHTML =  `<p>${userList} joined</p>`;
             
         } else {
             console.error("Error in server response:", response.status);
@@ -131,7 +127,7 @@
     const decodeToken= parseJwt(token) 
     console.log("id id id",decodeToken.Id )
     //to show all the message on the screen
-    const response = await axios.get(`http://localhost:3000/Message/showmessage/${decodeToken.Id}/${contactName}`); // to get all message
+    const response = await axios.get(`http://localhost:3000/Message/groupchatScreen/showMessage/${decodeToken.Id}/${decodedGroupName}`); // to get all message
     console.log("Response of message:", response.data);
     const userMessage_ = document.getElementById('AlluserMessage');
     
@@ -139,7 +135,7 @@
        
            
         
-            userMessage_.innerHTML += `<p>${value.createdAt}   ${value.ContactUsername}: ${value.message}</p>`;   
+            userMessage_.innerHTML += `<p>${value.createdAt}   ${value.Username}: ${value.Usermessage}</p>`;   
         
     })
     
@@ -155,7 +151,7 @@
                     }).join(''));
                     return JSON.parse(jsonPayload);
             }
-            function handleLoginFormSubmission(e) {
+            function handleGroupMessage(e) {
                 e.preventDefault(); 
                 const token = localStorage.getItem('token');
                 const decodeToken= parseJwt(token) 
@@ -171,12 +167,12 @@
                 var urlParts = currentURL.split('/');
 
                 // The last part of the URL is at the end of the array
-                const contactName = urlParts[urlParts.length - 1];
-                const decodedContactName = decodeURIComponent(contactName);
+                const groupName = urlParts[urlParts.length - 1];
+                const decodedGroupName = decodeURIComponent(groupName);
 
-                console.log("name-----", decodedContactName);
+                console.log("name-----", decodedGroupName);
     
-                axios.post('http://localhost:3000/Message/chatScreen', { message: message, user_id:user_id, contactName:decodedContactName})
+                axios.post('http://localhost:3000/Message/groupchatScreen', { message: message, user_id:user_id, groupName:decodedGroupName})
                 .then(response => {
                     // Handle the response as needed
                     console.log("Response from server:", response.data);
