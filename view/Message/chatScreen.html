@@ -105,7 +105,7 @@
     try {
        
 
-        const response = await axios.get(`http://localhost:3000/Message/showJoinedMember/${contactName}`); // to get the jsoon value
+        const response = await axios.get(`https://16.170.252.203:3000/Message/showJoinedMember/${contactName}`); // to get the jsoon value
         console.log("Response:", response);
 
         if (response.status === 200) {
@@ -131,7 +131,7 @@
     const decodeToken= parseJwt(token) 
     console.log("id id id",decodeToken.Id )
     //to show all the message on the screen
-    const response = await axios.get(`http://localhost:3000/Message/showmessage/${decodeToken.Id}/${contactName}`); // to get all message
+    const response = await axios.get(`https://16.170.252.203:3000/Message/showmessage/${decodeToken.Id}/${contactName}`); // to get all message
     console.log("Response of message:", response.data);
     const userMessage_ = document.getElementById('AlluserMessage');
     
@@ -176,7 +176,7 @@
 
                 console.log("name-----", decodedContactName);
     
-                axios.post('http://localhost:3000/Message/chatScreen', { message: message, user_id:user_id, contactName:decodedContactName})
+                axios.post('https://16.170.252.203:3000/Message/chatScreen', { message: message, user_id:user_id, contactName:decodedContactName})
                 .then(response => {
                     // Handle the response as needed
                     console.log("Response from server:", response.data);
