@@ -116,7 +116,7 @@
             </fieldset>
         </form>
 
-        <div class="signin-link" onclick="window.location.href='https://16.170.252.203:3000/Login/signin'">Already a User? Sign
+        <div class="signin-link" onclick="window.location.href='https://51.20.41.143:3000/Login/signin'">Already a User? Sign
             In</div>
     </main>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js" integrity="sha512-Fh/JL4KFgbH0OFN4EMEOvk90MTCjVuTVGFRDc+Kh5PyUFOzSzn/KA6PTOSNywfm5Ruppr40Uj09oGuj5tn6jiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -144,12 +144,12 @@
                     Password: e.target.Password.value
                 }
                 console.log(loginDetails);
-               axios.post('https://16.170.252.203:3000/Login/signup', loginDetails)
+               axios.post('https://51.20.41.143:3000/Login/signup', loginDetails)
                .then(response => {
                 if(response.status === 200)
                 {
                     alert(response.data.message);
-                    window.location.href = 'https://16.170.252.203:3000/Login/signin';  // this code redirects to the signin page after alert box display
+                    window.location.href = 'https://51.20.41.143:3000/Login/signin';  // this code redirects to the signin page after alert box display
                 }
                 
                })

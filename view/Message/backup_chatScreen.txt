@@ -42,7 +42,7 @@
     document.title = pageTitle;
 
     try {
-        const response = await axios.get('https://16.170.252.203:3000/Message/showJoinedMember'); // to get the jsoon value
+        const response = await axios.get('https://51.20.41.143:3000/Message/showJoinedMember'); // to get the jsoon value
         console.log("Response:", response);
 
         if (response.status === 200) {
@@ -66,7 +66,7 @@
     }
 
     //to show all the message on the screen
-    const response = await axios.get('https://16.170.252.203:3000/Message/showmessage'); // to get all message
+    const response = await axios.get('https://51.20.41.143:3000/Message/showmessage'); // to get all message
     console.log("Response of message:", response.data);
     const userMessage_ = document.getElementById('AlluserMessage');
     userMessage_.innerHTML += response.data.map(element => {
@@ -96,7 +96,7 @@
                 const messageInput = document.getElementById('message');
                 const message = messageInput.value; //  message from the input field
     
-                axios.post('https://16.170.252.203:3000/Message/chatScreen', { message: message, user_id:user_id})
+                axios.post('https://51.20.41.143:3000/Message/chatScreen', { message: message, user_id:user_id})
                 .then(response => {
                     // Handle the response as needed
                     console.log("Response from server:", response.data);

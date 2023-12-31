@@ -121,7 +121,7 @@
     document.title = pageTitle;
 
     try {
-        const response = await axios.get('https://16.170.252.203:3000/Message/home'); // to get the jsoon value
+        const response = await axios.get('https://51.20.41.143:3000/Message/home'); // to get the jsoon value
         console.log("Response:", response);
 
         if (response.status === 200) {
@@ -141,7 +141,7 @@
     
                 const groupMessage_ = document.getElementById('listOfgroups'); 
                 const childElement= document.createElement('li')
-                childElement.innerHTML += `<a href="https://16.170.252.203:3000/Message/groupchatScreen/${element}" action='GET'>${element}</a><br><br>`;
+                childElement.innerHTML += `<a href="https://51.20.41.143:3000/Message/groupchatScreen/${element}" action='GET'>${element}</a><br><br>`;
                 groupMessage_.appendChild(childElement);
                 
             });
@@ -156,7 +156,7 @@
 
             const userMessage_ = document.getElementById('listOfUsers'); 
             const childElement= document.createElement('li')
-            childElement.innerHTML += `<a href="https://16.170.252.203:3000/Message/home/${element.name}" action='GET'>${element.name}</a><br><br>`;
+            childElement.innerHTML += `<a href="https://51.20.41.143:3000/Message/home/${element.name}" action='GET'>${element.name}</a><br><br>`;
             userMessage_.appendChild(childElement);
             
         });
@@ -183,7 +183,7 @@
     {
         e.preventDefault();
         console.log('Button clicked!')
-        window.location.href = 'https://16.170.252.203:3000/Message/addGroup';
+        window.location.href = 'https://51.20.41.143:3000/Message/addGroup';
     }
       
 
