@@ -134,7 +134,7 @@ function addRow() {
     
 
     // group details
-    axios.post('https://51.20.41.143:3000/Message/addGroup', {GroupDetails:GroupDetails, AdminuserId: decodeToken.Id})
+    axios.post('https://107.22.97.216:3000/Message/addGroup', {GroupDetails:GroupDetails, AdminuserId: decodeToken.Id})
     .then(response => {
         if(response.status === 200)
         {
